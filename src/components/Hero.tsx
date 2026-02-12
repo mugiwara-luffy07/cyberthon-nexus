@@ -1,12 +1,20 @@
 import { Suspense, lazy } from "react";
 import { motion } from "framer-motion";
 import Countdown from "./Countdown";
+import heroFallback from "@/assets/hero-fallback.jpg";
 
 const ParticleField = lazy(() => import("./ParticleField"));
 
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
+      {/* Cinematic fallback image (shows while 3D loads / if WebGL unavailable) */}
+      <div
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40"
+        style={{ backgroundImage: `url(${heroFallback})` }}
+      />
+      <div className="absolute inset-0 z-0 bg-gradient-to-t from-background via-background/60 to-background/30" />
+
       {/* 3D Background */}
       <Suspense fallback={null}>
         <ParticleField />
@@ -14,8 +22,8 @@ export default function Hero() {
 
       {/* Radial gradient overlays */}
       <div className="absolute inset-0 z-[1] pointer-events-none">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/5 blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-secondary/5 blur-[100px]" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/8 blur-[120px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-secondary/8 blur-[100px]" />
       </div>
 
       {/* Content */}
