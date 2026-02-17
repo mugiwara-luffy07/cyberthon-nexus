@@ -8,27 +8,36 @@ const Spline = lazy(() => import("@splinetool/react-spline"));
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
-      {/* Cinematic fallback image (shows while 3D loads / if WebGL unavailable) */}
+      {/* Layer 0: Cinematic fallback image */}
       <div
-        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40"
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-30"
         style={{ backgroundImage: `url(${heroFallback})` }}
       />
-      <div className="absolute inset-0 z-0 bg-gradient-to-t from-background via-background/60 to-background/30" />
 
-      {/* 3D Spline Background */}
+      {/* Layer 1: Spline 3D scene — pushed down slightly so heads don't clash with title */}
       <Suspense fallback={null}>
-        <div className="absolute inset-0 z-[1]">
+        <div className="absolute inset-0 z-[1] pt-16 sm:pt-20">
           <Spline scene="https://prod.spline.design/vtLe-VDOLxe3ImeH/scene.splinecode" />
         </div>
       </Suspense>
 
-      {/* Radial gradient overlays */}
-      <div className="absolute inset-0 z-[1] pointer-events-none">
+      {/* Layer 2: Dark gradient overlays for text readability */}
+      <div className="absolute inset-0 z-[2] pointer-events-none">
+        {/* Top-down fade for heading area */}
+        <div className="absolute inset-x-0 top-0 h-[45%] bg-gradient-to-b from-background via-background/80 to-transparent" />
+        {/* Bottom-up fade for buttons / countdown */}
+        <div className="absolute inset-x-0 bottom-0 h-[35%] bg-gradient-to-t from-background via-background/70 to-transparent" />
+        {/* Center vignette for extra contrast */}
+        <div className="absolute inset-0 bg-radial-[ellipse_at_center] from-background/40 via-transparent to-transparent" />
+      </div>
+
+      {/* Layer 3: Radial neon glows */}
+      <div className="absolute inset-0 z-[3] pointer-events-none">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/8 blur-[120px]" />
         <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-secondary/8 blur-[100px]" />
       </div>
 
-      {/* Content */}
+      {/* Layer 10: Foreground content — always readable */}
       <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
         {/* Glitch Title */}
         <motion.div
@@ -38,7 +47,7 @@ export default function Hero() {
           className="mb-6"
         >
           <div className="relative inline-block">
-            <h1 className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tight gradient-text leading-none">
+            <h1 className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tight gradient-text leading-none drop-shadow-[0_0_30px_hsl(186_100%_49%/0.4)]">
               CYBERTHON
             </h1>
             {/* Glitch layers */}
@@ -58,7 +67,7 @@ export default function Hero() {
             </h1>
           </div>
           <div className="mt-2">
-            <span className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-foreground/90 tracking-wider">
+            <span className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-foreground/90 tracking-wider drop-shadow-[0_0_20px_hsl(0_0%_100%/0.3)]">
               26
             </span>
           </div>
@@ -69,7 +78,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="font-body text-base sm:text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-12 font-light"
+          className="font-body text-base sm:text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-12 font-light drop-shadow-[0_2px_8px_hsl(0_0%_0%/0.8)]"
         >
           The World's Most Elite{" "}
           <span className="text-primary font-medium">Cybersecurity</span>{" "}
