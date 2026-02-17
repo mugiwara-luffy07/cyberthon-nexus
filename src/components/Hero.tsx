@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import Countdown from "./Countdown";
 import heroFallback from "@/assets/hero-fallback.jpg";
 
-const ParticleField = lazy(() => import("./ParticleField"));
+const Spline = lazy(() => import("@splinetool/react-spline"));
 
 export default function Hero() {
   return (
@@ -15,9 +15,11 @@ export default function Hero() {
       />
       <div className="absolute inset-0 z-0 bg-gradient-to-t from-background via-background/60 to-background/30" />
 
-      {/* 3D Background */}
+      {/* 3D Spline Background */}
       <Suspense fallback={null}>
-        <ParticleField />
+        <div className="absolute inset-0 z-[1]">
+          <Spline scene="https://prod.spline.design/vtLe-VDOLxe3ImeH/scene.splinecode" />
+        </div>
       </Suspense>
 
       {/* Radial gradient overlays */}
