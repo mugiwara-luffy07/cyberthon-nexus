@@ -1,4 +1,11 @@
 @tailwind base;
+
+/* Hide Spline watermark */
+#logo, [id="logo"], a[href*="spline.design"] {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
 @tailwind components;
 @tailwind utilities;
 
