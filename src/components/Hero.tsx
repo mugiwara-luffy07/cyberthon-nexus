@@ -16,7 +16,7 @@ export default function Hero() {
       >
         <Spline
           className="absolute inset-0 w-full h-full"
-          scene="https://prod.spline.design/vtLe-VDOLxe3ImeH/scene.splinecode"
+          scene="https://prod.spline.design/fzDIiLfkYkO8lxPK/scene.splinecode"
         />
       </Suspense>
     </section>
